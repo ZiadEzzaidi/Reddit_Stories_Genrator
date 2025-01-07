@@ -45,9 +45,11 @@
       const [transformedStory, setTransformedStory] = useState('')
 
       const handleScrap = () => {
+        console.log('Scrap button clicked') // Debugging
         const randomThreads = mockThreads
           .sort(() => 0.5 - Math.random())
           .slice(0, 3)
+        console.log('Random threads:', randomThreads) // Debugging
         setThreads(randomThreads)
         setSelectedThread(null)
         setTransformedStory('')
@@ -73,6 +75,52 @@
         `
         
         setTransformedStory(transformed)
+      }
+
+      const handleExportScript = () => {
+        if (!transformedStory) return
+
+        // Create a Blob with the script content
+        const blob = new Blob([transformedStory], { type: 'text/plain' })
+        const url = URL.createObjectURL(blob)
+
+        // Create a temporary link to trigger the download
+        const link = document.createElement('a')
+        link.href = url
+        link.download = 'tiktok-script.txt'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      }
+
+      const generateTimeline = () => {
+        if (!transformedStory) return []
+
+        return [
+          { scene: 'Scene 1', time: '0:00 - 0:05', description: 'Introduction' },
+          { scene: 'Scene 2', time: '0:05 - 0:10', description: 'Build suspense' },
+          { scene: 'Scene 3', time: '0:10 - 0:15', description: 'Climax' },
+        ]
+      }
+
+      const generateHashtags = () => {
+        return [
+          '#HorrorStory',
+          '#TrueScary',
+          '#TikTokHorror',
+          '#CreepyTales',
+          '#ScaryStories',
+          '#HorrorTok',
+        ]
+      }
+
+      const generateCaptions = () => {
+        return {
+          hook: "You won't believe what happened next...",
+          callToAction: "Follow for more scary stories!",
+          hashtags: generateHashtags().join(' '),
+        }
       }
 
       return (
@@ -141,15 +189,80 @@
                 )}
               </div>
 
-              {/* Feature Three */}
+              {/* TikTok Toolkit Feature */}
               <div className="flex-1 p-8 border rounded-lg shadow-md hover:shadow-lg transition-shadow relative">
-                <button className="absolute top-4 right-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors text-sm">
-                  Try Now
+                <button 
+                  onClick={handleExportScript}
+                  disabled={!transformedStory}
+                  className="absolute top-4 right-4 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors text-sm disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  Export Script
                 </button>
-                <h2 className="text-2xl font-semibold mb-4">Feature Three</h2>
-                <p className="text-gray-600">
-                  Detailed description of feature three with more information
+                <h2 className="text-2xl font-semibold mb-4">TikTok Toolkit</h2>
+                <p className="text-gray-600 mb-4">
+                  Tools to make your TikTok short creation easier
                 </p>
+
+                {transformedStory && (
+                  <div className="space-y-6">
+                    {/* Visual Timeline */}
+                    <div>
+                      <h3 className="font-medium mb-2">Visual Timeline</h3>
+                      <div className="space-y-2">
+                        {generateTimeline().map((item, index) => (
+                          <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                            <p className="text-sm font-medium">
+                              {item.scene}: {item.time}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              {item.description}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Hashtag Suggestions */}
+                    <div>
+                      <h3 className="font-medium mb-2">Hashtag Suggestions</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {generateHashtags().map((hashtag, index) => (
+                          <span
+                            key={index}
+                            className="bg-gray-100 px-2 py-1 rounded-md text-sm"
+                          >
+                            {hashtag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Pre-Formatted Captions */}
+                    <div>
+                      <h3 className="font-medium mb-2">Pre-Formatted Captions</h3>
+                      <div className="space-y-2">
+                        <div className="p-3 bg-gray-50 rounded-lg">
+                          <p className="text-sm font-medium">Hook:</p>
+                          <p className="text-sm text-gray-600">
+                            {generateCaptions().hook}
+                          </p>
+                        </div>
+                        <div className="p-3 bg-gray-50 rounded-lg">
+                          <p className="text-sm font-medium">Call-to-Action:</p>
+                          <p className="text-sm text-gray-600">
+                            {generateCaptions().callToAction}
+                          </p>
+                        </div>
+                        <div className="p-3 bg-gray-50 rounded-lg">
+                          <p className="text-sm font-medium">Hashtags:</p>
+                          <p className="text-sm text-gray-600">
+                            {generateCaptions().hashtags}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </main>
