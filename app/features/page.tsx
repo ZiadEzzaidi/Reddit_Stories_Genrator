@@ -123,6 +123,46 @@
         }
       }
 
+      const generateVisualSuggestions = () => {
+        return [
+          {
+            scene: 'Scene 1',
+            suggestion: 'Use a dark, eerie background with flickering lights.',
+            source: 'Pexels: https://www.pexels.com/search/horror/',
+          },
+          {
+            scene: 'Scene 2',
+            suggestion: 'Add a shadowy figure in the background.',
+            source: 'Pixabay: https://pixabay.com/images/search/horror/',
+          },
+          {
+            scene: 'Scene 3',
+            suggestion: 'Use a close-up of a terrified face.',
+            source: 'Unsplash: https://unsplash.com/s/photos/horror',
+          },
+        ]
+      }
+
+      const generateSoundRecommendations = () => {
+        return [
+          {
+            scene: 'Scene 1',
+            suggestion: 'Add eerie background music with subtle whispers.',
+            source: 'FreeSound: https://freesound.org/search/?q=horror',
+          },
+          {
+            scene: 'Scene 2',
+            suggestion: 'Use suspenseful music with a slow build-up.',
+            source: 'Zapsplat: https://www.zapsplat.com/music/horror/',
+          },
+          {
+            scene: 'Scene 3',
+            suggestion: 'Add a sudden loud noise for a jump scare effect.',
+            source: 'AudioJungle: https://audiojungle.net/search/horror',
+          },
+        ]
+      }
+
       return (
         <div>
           <Navbar />
@@ -259,6 +299,44 @@
                             {generateCaptions().hashtags}
                           </p>
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Visual Element Suggestions */}
+                    <div>
+                      <h3 className="font-medium mb-2">Visual Element Suggestions</h3>
+                      <div className="space-y-2">
+                        {generateVisualSuggestions().map((item, index) => (
+                          <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                            <p className="text-sm font-medium">
+                              {item.scene}: {item.suggestion}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              Source: <a href={item.source} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                                {item.source}
+                              </a>
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Sound Recommendations */}
+                    <div>
+                      <h3 className="font-medium mb-2">Sound Recommendations</h3>
+                      <div className="space-y-2">
+                        {generateSoundRecommendations().map((item, index) => (
+                          <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                            <p className="text-sm font-medium">
+                              {item.scene}: {item.suggestion}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              Source: <a href={item.source} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                                {item.source}
+                              </a>
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
