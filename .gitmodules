@@ -1,0 +1,3 @@
+[submodule "reddit_api_post_fetcher"]
+	path = reddit_api_post_fetcher
+	url = https://github.com/TechRookies/reddit_api_post_fetcher
