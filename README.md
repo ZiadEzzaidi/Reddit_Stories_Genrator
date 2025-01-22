@@ -25,40 +25,61 @@ cd Project Interface
 
 2. Install the dependencies:
 
+```sh
 npm install
+```
 
 3. Create a .env file in the Project Interface directory and add your environment variables:
 
+```sh
 touch .env
+```
 
 4. Start the development server:
 
+```sh
 npm run dev
+```
 
 ## Setting Up the Reddit Scrapper (Python)
 
 1. Create a virtual environment (optional but recommended):
 
+```sh
 python -m venv venv
+```
 
 2. Activate the virtual environment:
 
 - On Windows:
+
+```sh
   venv\Scripts\activate
+```
+
 - On macOS/Linux:
+
+```sh
   source venv/bin/activate
+```
 
 3. Install the dependencies:
 
+```sh
 pip install -r requirements.txt
+```
 
 4. Create a .env file in the root directory and add your environment variables:
 
+```sh
 touch .env
+```
 
 5.Run the Reddit Scrapper:
 
+```sh
 python src/main.py
+```
 
 ## Usage
 
